@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Portfolio | lucxifvr</title>
+<link rel="icon" type="image/png" href="img/blackarch.png   ">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+    --bg:#0b0b0b;
+    --fg:#e8e8e8;
+    --dim:rgba(255,255,255,0.35);
+    --border:rgba(255,255,255,0.10);
+}
+html{background:#0b0b0b;}
+html,body{
+    background:#0b0b0b;
+    color:var(--fg);
+    font-family:'Courier New',Courier,monospace;
+    height:100%;
+    overflow:hidden;
+    opacity:0;
+    animation:pageFadeIn 1.4s ease 0.1s forwards;
+}
+@keyframes pageFadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+.topbar{
+    position:fixed;top:0;left:0;right:0;height:42px;
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 20px;font-size:12px;color:var(--dim);
+    z-index:100;background:#0b0b0b;
+}
+.back-btn{color:var(--dim);text-decoration:none;font-size:12px;transition:color 0.2s;letter-spacing:.5px;}
+.back-btn:hover{color:#fff;}
+.topbar-clock{font-size:11px;opacity:.5;letter-spacing:1px;}
+.topbar-user{font-size:12px;opacity:.6;}
+
+.main{display:flex;height:100vh;padding-top:42px;}
+
+.terminal-panel{
+    width:45%;border-right:1px solid var(--border);
+    padding:36px 32px;display:flex;flex-direction:column;overflow:hidden;
+}
+.terminal-header{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;opacity:.5;}
+.terminal-line{font-size:13px;line-height:1.9;color:var(--fg);white-space:pre-wrap;}
+.terminal-line.prompt{color:rgba(255,255,255,.55);margin-top:18px;font-size:12px;}
+.terminal-line.output{color:rgba(255,255,255,.80);padding-left:16px;border-left:1px solid rgba(255,255,255,.08);}
+.terminal-line.dim{color:rgba(255,255,255,.30);font-size:11px;}
+.terminal-cursor{display:inline-block;width:7px;height:13px;background:#fff;vertical-align:middle;margin-left:2px;animation:cursorBlink 1s infinite;}
+@keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+.projects-panel{flex:1;padding:36px 32px;display:flex;flex-direction:column;overflow-y:auto;}
+.projects-header{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;opacity:.5;}
+.project-list{display:flex;flex-direction:column;gap:8px;}
+.project-btn{
+    background:transparent;border:1px solid var(--border);color:var(--fg);
+    font-family:'Courier New',monospace;font-size:12px;padding:12px 18px;
+    text-align:left;cursor:pointer;border-radius:5px;
+    display:flex;align-items:center;justify-content:space-between;
+    transition:background .18s,border-color .18s,transform .18s;
+    opacity:0;letter-spacing:.5px;
+}
+.project-btn.visible{opacity:1;}
+.project-btn:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.30);transform:translateY(-2px);}
+.proj-name{font-weight:600;}
+.proj-tag{font-size:10px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;opacity:.6;}
+.proj-status{font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:4px;font-weight:600;}
+.proj-status.building{background:rgba(255,180,0,.12);color:#ffb400;border:1px solid rgba(255,180,0,.25);}
+.proj-status.done{background:rgba(40,200,80,.12);color:#28c840;border:1px solid rgba(40,200,80,.25);}
+.proj-status.abandoned{background:rgba(255,80,80,.10);color:#ff6060;border:1px solid rgba(255,80,80,.20);}
+
+.modal-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,.75);
+    backdrop-filter:blur(4px);z-index:200;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{
+    background:#111;border:1px solid rgba(255,255,255,.15);border-radius:8px;
+    width:min(520px,90vw);padding:32px;
+    transform:translateY(12px);transition:transform .25s ease;position:relative;
+}
+.modal-overlay.open .modal{transform:translateY(0);}
+.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;color:var(--dim);font-size:18px;cursor:pointer;font-family:monospace;transition:color .15s;}
+.modal-close:hover{color:#fff;}
+.modal-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);opacity:.6;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.modal-title{font-size:20px;font-weight:700;margin-bottom:14px;letter-spacing:.5px;}
+.modal-desc{font-size:13px;line-height:1.8;color:rgba(255,255,255,.65);margin-bottom:20px;}
+.modal-tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px;}
+.tech-tag{font-size:10px;border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:3px 8px;color:rgba(255,255,255,.45);letter-spacing:.5px;}
+.modal-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--fg);text-decoration:none;border:1px solid rgba(255,255,255,.20);border-radius:5px;padding:8px 16px;transition:background .18s,border-color .18s,transform .18s;}
+.modal-link:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.45);transform:translateY(-2px);}
+
+.arch-icon{
+    position:fixed;bottom:14px;left:20px;
+    width:40px;height:40px;border-radius:50%;background:white;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;user-select:none;z-index:10;text-decoration:none;
+    transition:transform .22s ease,box-shadow .22s ease;
+    box-shadow:0 0 10px rgba(180,0,0,0.20);
+}
+.arch-icon:hover{transform:translateY(-3px) scale(1.12);box-shadow:0 0 14px rgba(180,0,0,0.60);}
+.arch-icon img{width:80%;height:80%;object-fit:contain;display:block;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
+
+.afk-overlay{
+    position:fixed;inset:0;background:#0b0b0b;z-index:9000;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity 1s ease;
+}
+.afk-overlay.active{opacity:1;pointer-events:all;}
+.afk-text{
+    font-family:'Courier New',monospace;font-size:13px;
+    color:rgba(255,255,255,.15);letter-spacing:2px;
+    animation:afkFloat 6s ease-in-out infinite;
+}
+@keyframes afkFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+@media(max-width:680px){
+    .main{flex-direction:column;overflow-y:auto;height:auto;}
+    .terminal-panel{width:100%;border-right:none;border-bottom:1px solid var(--border);padding:24px 20px;}
+    .projects-panel{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div style="display:flex;align-items:center;gap:16px;">
+        <a class="back-btn" href="index.html">← volver</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+        <span class="topbar-clock" id="clock"></span>
+        <span class="topbar-user">> .lucxifvr_</span>
+    </div>
+</div>
+
+<div class="main">
+    <div class="terminal-panel">
+        <div class="terminal-header">// terminal</div>
+        <div id="termOutput"></div>
+    </div>
+    <div class="projects-panel">
+        <div class="projects-header">// projects</div>
+        <div class="project-list" id="projectList"></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModalBtn()">✕</button>
+        <div class="modal-tag" id="mTag"></div>
+        <div class="modal-title" id="mTitle"></div>
+        <div class="modal-desc" id="mDesc"></div>
+        <div class="modal-tech" id="mTech"></div>
+        <a class="modal-link" id="mLink" href="#" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            Ver en GitHub
+        </a>
+        <a class="modal-link" id="mNoLink" href="#" style="display:none;" onclick="return false;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            Sin repositorio público
+        </a>
+    </div>
+</div>
+
+<div class="afk-overlay" id="afkOverlay" onclick="wakeUp()">
+    <div class="afk-text">> away from keyboard_</div>
+</div>
+
+<a class="arch-icon" href="now.html" title="// now">
+    <img src="img/blackarch.png" alt="">
+</a>
+
+<script>
+function updateClock(){const n=new Date();document.getElementById('clock').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');}
+updateClock();setInterval(updateClock,10000);
+
+const projects = [
+    {
+        name: "/ My Website",
+        tag: "HTML",
+        status: "done",
+        title: "My WebSite",
+        desc: "Esta es una pagina de mi portafolio personal creada para mostrar mis proyectos y redes sociales de contacto.",
+        tech: ["HTML", "JavaScript", "CSS"],
+        link: "https://github.com/lucxifvr-dev/lucxifvr-dev.github.io"
+    },
+    {
+        name: "/ Bot Discord",
+        tag: "Python",
+        status: "done",
+        title: "Bot Discord",
+        desc: "Un bot de Discord creado con Python para automatizar tareas y mejorar la experiencia del usuario.",
+        tech: ["Python"],
+        link: "https://github.com/lucxifvr-dev/Bot-Discord"
+    },
+    {
+        name: "/ Netflix Checker",
+        tag: "Python",
+        status: "abandoned",
+        title: "Netflix Checker",
+        desc: "Una herramienta para verificar la validez de cuentas de Netflix. Actualmente abandonada debido a cambios en la plataforma de Netflix que dificultaron su funcionamiento.",
+        tech: ["Python"],
+        NoLink: true
+    }
+];
+
+const lines=[
+    {type:'prompt',text:'> whoami'},
+    {type:'output',text:'lucxifvr — Dev en formación.'},
+    {type:'output',text:'Python / Java / C++ / HTML / CSS'},
+    {type:'prompt',text:'> cat about.txt'},
+    {type:'output',text:'Construyendo cosas.\nAprendiendo cada día.\nCybersecurity coming soon.'},
+    {type:'prompt',text:'> ls projects/'},
+    {type:'output',text:projects.map(p=>p.name).join('   ')},
+    {type:'dim',text:'// selecciona un proyecto →'},
+];
+const termEl=document.getElementById('termOutput');
+let lineIdx=0,charIdx=0,currentEl=null;
+function typeNext(){
+    if(lineIdx>=lines.length){const c=document.createElement('span');c.className='terminal-cursor';termEl.appendChild(c);return;}
+    const line=lines[lineIdx];
+    if(charIdx===0){currentEl=document.createElement('div');currentEl.className='terminal-line '+line.type;termEl.appendChild(currentEl);}
+    const ft=line.text;
+    if(charIdx<ft.length){currentEl.textContent=ft.slice(0,charIdx+1);charIdx++;setTimeout(typeNext,line.type==='prompt'?38:18);}
+    else{lineIdx++;charIdx=0;setTimeout(typeNext,line.type==='prompt'?280:120);}
+}
+setTimeout(typeNext,500);
+
+const listEl=document.getElementById('projectList');
+const statusMap={building:'en desarrollo',done:'terminado',abandoned:'abandonado'};
+projects.forEach((p,i)=>{
+    const btn=document.createElement('button');
+    btn.className='project-btn';
+    btn.innerHTML=`<span class="proj-name">> ${p.name}</span><div style="display:flex;align-items:center;gap:6px;"><span class="proj-tag">${p.tag}</span><span class="proj-status ${p.status}">${statusMap[p.status]||p.status}</span></div>`;
+    btn.addEventListener('click',()=>openModal(p));
+    listEl.appendChild(btn);
+    setTimeout(()=>btn.classList.add('visible'),400+i*150);
+});
+
+function openModal(p){
+    document.getElementById('mTag').innerHTML=p.tag+'&nbsp;<span class="proj-status '+p.status+'">'+statusMap[p.status]+'</span>';
+    document.getElementById('mTitle').textContent=p.title;
+    document.getElementById('mDesc').textContent=p.desc;
+    const t=document.getElementById('mTech');t.innerHTML='';
+    p.tech.forEach(x=>{const s=document.createElement('span');s.className='tech-tag';s.textContent=x;t.appendChild(s);});
+    document.getElementById('mLink').href=p.link;
+    document.getElementById('mLink').style.display=p.NoLink?'none':'inline-flex';
+    document.getElementById('mNoLink').style.display=p.NoLink?'inline-flex':'none';
+    document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal(e){if(e.target===document.getElementById('modalOverlay'))document.getElementById('modalOverlay').classList.remove('open');}
+function closeModalBtn(){document.getElementById('modalOverlay').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('modalOverlay').classList.remove('open');});
+
+let afkTimer;
+function resetAfk(){
+    clearTimeout(afkTimer);
+    document.getElementById('afkOverlay').classList.remove('active');
+    afkTimer=setTimeout(()=>document.getElementById('afkOverlay').classList.add('active'),120000);
+}
+function wakeUp(){document.getElementById('afkOverlay').classList.remove('active');resetAfk();}
+['mousemove','keydown','click','touchstart'].forEach(e=>document.addEventListener(e,resetAfk));
+resetAfk();
+</script>
+</body>
+</html>

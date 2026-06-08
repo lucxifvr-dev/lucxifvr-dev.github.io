@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>.lucxifvr_ | Dev & Cybersecurity</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="img/blackarch.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Programador en formación. Python, Java, C++, HTML, CSS. Cybersecurity coming soon.">
+<meta property="og:title" content=".lucxifvr_ | Dev & Cybersecurity">
+<meta property="og:description" content="Programador en formación. Python, Java, C++. Cybersecurity coming soon.">
+<meta property="og:image" content="https://lucxifvr-dev.github.io/img/avatar.gif">
+<meta property="og:url" content="https://lucxifvr-dev.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content=".lucxifvr_ | Dev & Cybersecurity">
+<meta name="twitter:description" content="Programador en formación. Python, Java, C++. Cybersecurity coming soon.">
+<meta name="twitter:image" content="https://lucxifvr-dev.github.io/img/avatar.gif">
+</head>
+<body>
+
+<canvas id="rain-canvas"></canvas>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<div class="container">
+    <div class="left">
+        <h1>.lucxifvr<span class="cursor">_</span></h1>
+        <p>> Cybersecurity Coming Soon</p>
+        <p id="ageText">> calculando...</p>
+        <img src="img/avatar.gif" class="avatar">
+    </div>
+
+    <div class="right">
+
+        <!-- Spotify widget -->
+        <div class="spotify-widget" id="spotifyWidget">
+            <div class="sp-top">
+                <div class="sp-art" id="spArt">
+                    <span class="sp-art-placeholder">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 0 1-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 0 1-.973-.519.781.781 0 0 1 .52-.974c3.632-1.102 8.147-.568 11.233 1.329a.78.78 0 0 1 .257 1.073zm.105-2.835C14.69 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.794c3.532-1.072 9.404-.865 13.115 1.339a.937.937 0 0 1-.955 1.612z"/></svg>
+                    </span>
+                </div>
+                <div class="sp-info">
+                    <div class="sp-label">ahora escuchando</div>
+                    <div class="sp-track" id="spTrack">— sin actividad —</div>
+                    <div class="sp-artist" id="spArtist"></div>
+                </div>
+                <div class="sp-bar" id="spBar">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="links">
+            <a class="social-btn instagram" href="https://www.instagram.com/ydeath.ro/" target="_blank">
+                <span class="btn-icon icon-left">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <circle cx="12" cy="12" r="4.5"/>
+                        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+                    </svg>
+                </span>
+                Instagram
+            </a>
+
+            <a class="social-btn twitter" href="https://x.com/neuca" target="_blank">
+                Twitter / X
+                <span class="btn-icon icon-right">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </span>
+            </a>
+
+            <a class="social-btn github" href="https://github.com/lucxifvr-dev" target="_blank">
+                <span class="btn-icon icon-left">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                    </svg>
+                </span>
+                GitHub
+            </a>
+
+            <a class="social-btn spotify" href="https://open.spotify.com/user/31znq6yv7lbcanyu6ouusrtf4lee" target="_blank">
+                Spotify
+                <span class="btn-icon icon-right">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 0 1-.277-1.215c3.809-.87 7.077-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 0 1-.973-.519.781.781 0 0 1 .52-.974c3.632-1.102 8.147-.568 11.233 1.329a.78.78 0 0 1 .257 1.073zm.105-2.835C14.69 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.794c3.532-1.072 9.404-.865 13.115 1.339a.937.937 0 0 1-.955 1.612z"/>
+                    </svg>
+                </span>
+            </a>
+
+            <a class="social-btn telegram" href="https://t.me/nwvzy" target="_blank">
+                <span class="btn-icon icon-left">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.69 7.96c-.12.57-.46.71-.93.44l-2.58-1.9-1.24 1.2c-.14.14-.25.25-.52.25l.19-2.66 4.84-4.37c.21-.19-.05-.29-.32-.1L7.9 14.12l-2.55-.8c-.55-.17-.56-.55.12-.82l9.96-3.84c.46-.17.86.11.71.14z"/>
+                    </svg>
+                </span>
+                Telegram
+            </a>
+
+            <a class="social-btn gmail" href="https://mail.google.com/mail/?view=cm&fs=1&to=666.nwvzy@gmail.com" target="_blank">
+                Gmail
+                <span class="btn-icon icon-right">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+
+        <div class="portfolio-wrapper">
+            <a class="portfolio-btn" href="portfolio.html">
+                <img src="img/Portafolio.png" class="portfolio-icon" alt="">
+                My Portfolio
+            </a>
+        </div>
+
+        <hr class="linea">
+
+        <div class="discord-container">
+            <p class="discord-label">Discord</p>
+            <div class="discord-badge" onclick="copyDiscord()" title="Click para copiar">
+                <span class="discord-icon">
+                    <svg width="18" height="18" viewBox="0 0 127.14 96.36" fill="currentColor">
+                        <path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.14zM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69z"/>
+                    </svg>
+                </span>
+                <span class="discord-user">.lucxifvr_</span>
+                <span class="discord-copy-hint">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </span>
+            </div>
+            <p class="copy-feedback" id="copy-feedback">¡Copiado!</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="status-bar">
+    <span class="status-text" id="statusText"></span>
+</div>
+
+<a class="arch-icon" href="now.html" title="// now">
+    <img src="img/blackarch.png" alt="">
+</a>
+
+<div class="footer-copy">
+    <span class="fc-icon"><img src="img/blackarch.png" alt=""></span>
+    <span>©</span>
+    <span id="footerYear"></span>
+    <span>— lucxifvr-dev.github.io · All Rights Reserved</span>
+</div>
+
+<script>
+(function() {
+    const born = new Date(2010, 1, 26);
+    const now = new Date();
+    let age = now.getFullYear() - born.getFullYear();
+    const m = now.getMonth() - born.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < born.getDate())) age--;
+    document.getElementById('ageText').textContent = '> ' + age + ' years old';
+})();
+
+function copyDiscord(){
+    navigator.clipboard.writeText(".lucxifvr_").then(() => {
+        const fb = document.getElementById("copy-feedback");
+        fb.classList.add("show");
+        setTimeout(() => fb.classList.remove("show"), 1800);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const delays = [300,450,600,750,900,1050];
+    document.querySelectorAll(".social-btn").forEach((btn,i) => {
+        setTimeout(() => btn.classList.add("visible"), delays[i]);
+    });
+    setTimeout(() => {
+        const pb = document.querySelector(".portfolio-btn");
+        if (pb) pb.classList.add("visible");
+    }, 1200);
+
+    const el = document.getElementById("statusText");
+    const base = "> status: building";
+    el.textContent = "";
+    setTimeout(() => {
+        let i = 0;
+        function typeBase() {
+            if (i < base.length) { el.textContent = base.slice(0,i+1); i++; setTimeout(typeBase,28); }
+            else addDot(0);
+        }
+        typeBase();
+        function addDot(idx) {
+            if (idx >= 3) return;
+            let blinks=0, visible=true;
+            const dotStr = ".".repeat(idx+1);
+            const interval = setInterval(() => {
+                visible = !visible;
+                el.textContent = base + (visible ? dotStr : dotStr.slice(0,-1));
+                blinks++;
+                if (blinks >= 3) { clearInterval(interval); el.textContent = base+dotStr; setTimeout(()=>addDot(idx+1),400); }
+            }, 260);
+        }
+    }, 1800);
+
+    const LASTFM_USER = "lucxifvr_";
+    const LASTFM_KEY  = "eb26bf382c9c80441aa4710181481e23";
+    let _lastTrack = "";
+
+    async function fetchSpotify(){
+        try {
+            const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_KEY}&format=json&limit=1`);
+            const data = await res.json();
+            const track = data.recenttracks.track[0];
+            const isPlaying = track["@attr"] && track["@attr"].nowplaying === "true";
+
+            document.getElementById("spTrack").textContent  = track.name;
+            document.getElementById("spArtist").textContent = track.artist["#text"];
+            document.getElementById("spBar").style.opacity  = isPlaying ? "1" : "0.3";
+
+            const imgUrl = track.image && track.image.length ? track.image[track.image.length-1]["#text"] : "";
+            if(imgUrl){
+                const artEl = document.getElementById("spArt");
+                const trackKey = track.name + "|" + track.artist["#text"];
+                if(_lastTrack !== trackKey){
+                    _lastTrack = trackKey;
+                    artEl.innerHTML = `<img src="${imgUrl}" alt="cover">`;
+                }
+            }
+        } catch(e){}
+    }
+    fetchSpotify();
+    setInterval(fetchSpotify, 10000);
+
+    let afkTimer;
+    function resetAfk(){
+        clearTimeout(afkTimer);
+        document.getElementById('afkOverlay').classList.remove('active');
+        afkTimer = setTimeout(()=>document.getElementById('afkOverlay').classList.add('active'), 120000);
+    }
+    window.wakeUp = function(){ document.getElementById('afkOverlay').classList.remove('active'); resetAfk(); };
+    ['mousemove','keydown','click','touchstart'].forEach(e=>document.addEventListener(e,resetAfk));
+    resetAfk();
+});
+</script>
+
+<div class="afk-overlay" id="afkOverlay" onclick="wakeUp()">
+    <div class="afk-text">> away from keyboard_</div>
+</div>
+
+<script src="animations.js"></script>
+
+<script>
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+const dot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top  = e.clientY + 'px';
+});
+document.addEventListener('mousedown', () => dot.classList.add('clicking'));
+document.addEventListener('mouseup',   () => dot.classList.remove('clicking'));
+
+const canvas = document.getElementById('rain-canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeRain() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeRain();
+window.addEventListener('resize', resizeRain);
+
+const drops = Array.from({length: 120}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    len: Math.random() * 14 + 6,
+    speed: Math.random() * 2.5 + 1.2,
+    opacity: Math.random() * 0.4 + 0.1,
+    width: Math.random() * 0.6 + 0.3
+}));
+
+function drawRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drops.forEach(d => {
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - 1, d.y + d.len);
+        ctx.strokeStyle = `rgba(160,200,255,${d.opacity})`;
+        ctx.lineWidth = d.width;
+        ctx.stroke();
+
+        d.y += d.speed;
+        if (d.y > canvas.height + d.len) {
+            d.y = -d.len;
+            d.x = Math.random() * canvas.width;
+        }
+    });
+    requestAnimationFrame(drawRain);
+}
+drawRain();
+</script>
+</body>
+</html>
