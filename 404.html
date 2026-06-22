@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>404 — lucxifvr</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="img/blackarch.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Página no encontrada.">
+<meta property="og:title" content="404 — lucxifvr-dev.github.io">
+<meta property="og:description" content="Esta página no existe.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b0b0b">
+</head>
+<body class="page-404">
+
+<canvas id="rain-canvas"></canvas>
+
+<div class="terminal">
+    <div class="term-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <span class="term-title">lucxifvr@blackarch ~ — 404.log</span>
+    </div>
+    <div class="term-body">
+        <div class="line green"   style="animation-delay:0.1s">lucxifvr@blackarch ~ — 404.log</div>
+        <div class="line empty"   style="animation-delay:0.2s"></div>
+        <div class="line cmd"     style="animation-delay:0.4s">$ cd /pagina-solicitada</div>
+        <div class="line out"     style="animation-delay:0.7s">bash: cd: pagina-solicitada: No such file or directory</div>
+        <div class="line empty"   style="animation-delay:1.0s"></div>
+        <div class="line error"   style="animation-delay:1.2s">ERROR 404 — Página no encontrada</div>
+        <div class="line dim"     style="animation-delay:1.6s" id="urlLine">// ruta: cargando...</div>
+        <div class="line empty"   style="animation-delay:1.8s"></div>
+        <div class="line out"     style="animation-delay:2.0s">$ locate index.html</div>
+        <div class="line out"     style="animation-delay:2.2s">/index.html ... encontrado</div>
+        <div class="line dim"     style="animation-delay:2.4s">// vuelve a un lugar que sí existe ↓</div>
+
+        <div class="back-row">
+            <a class="back" href="index.html">← volver al inicio</a>
+        </div>
+    </div>
+</div>
+
+<div class="afk-overlay" id="afkOverlay" onclick="wakeUp()">
+    <div class="afk-text">> away from keyboard_</div>
+</div>
+
+<script>
+document.getElementById('urlLine').textContent = '// ruta: ' + window.location.pathname;
+
+let afkTimer;
+function resetAfk(){
+    clearTimeout(afkTimer);
+    document.getElementById('afkOverlay').classList.remove('active');
+    afkTimer = setTimeout(()=>document.getElementById('afkOverlay').classList.add('active'), 120000);
+}
+function wakeUp(){ document.getElementById('afkOverlay').classList.remove('active'); resetAfk(); }
+['mousemove','keydown','click','touchstart'].forEach(e=>document.addEventListener(e,resetAfk));
+resetAfk();
+
+const canvas = document.getElementById('rain-canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeRain() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeRain();
+window.addEventListener('resize', resizeRain);
+
+const drops = Array.from({length: 120}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    len: Math.random() * 14 + 6,
+    speed: Math.random() * 2.5 + 1.2,
+    opacity: Math.random() * 0.4 + 0.1,
+    width: Math.random() * 0.6 + 0.3
+}));
+
+function drawRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drops.forEach(d => {
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - 1, d.y + d.len);
+        ctx.strokeStyle = `rgba(160,200,255,${d.opacity})`;
+        ctx.lineWidth = d.width;
+        ctx.stroke();
+
+        d.y += d.speed;
+        if (d.y > canvas.height + d.len) {
+            d.y = -d.len;
+            d.x = Math.random() * canvas.width;
+        }
+    });
+    requestAnimationFrame(drawRain);
+}
+drawRain();
+</script>
+
+</body>
+</html>
